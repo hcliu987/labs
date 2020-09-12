@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>labs</artifactId>
+        <groupId>org.hc</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.hc</groupId>
-    <artifactId>labs</artifactId>
+    <artifactId>lab-16-spring-data-mongo</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
     <modules>
-<!--        <module>lab-04-rabbitmq</module>-->
-<!--        <module>lab-11-spring-data-redis</module>-->
-<!--        <module>lab-16-spring-data-mongo</module>-->
-        <module>lab-21</module>
+        <module>lab-16-spring-data-mongodb</module>
     </modules>
 
 
