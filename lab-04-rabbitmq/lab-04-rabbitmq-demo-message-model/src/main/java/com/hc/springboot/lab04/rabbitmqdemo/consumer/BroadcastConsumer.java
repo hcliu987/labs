@@ -9,22 +9,24 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RabbitListener(
-        bindings = @QueueBinding(
-                value = @Queue(
-                  name = BroadcastMessage.QUEUE+"-"+"#{T(java.util.UUID).randomUUID()}",
-                        autoDelete = "true"
-                ),
-                exchange = @Exchange(
-                        name = BroadcastMessage.EXCHANGE,
-                        type = ExchangeTypes.TOPIC,
-                        declare = "false"
-                )
+    bindings = @QueueBinding(
+        value = @Queue(
+            name = BroadcastMessage.QUEUE + "-" + "#{T(java.util.UUID).randomUUID()}",
+            autoDelete = "true"
+        ),
+        exchange = @Exchange(
+            name = BroadcastMessage.EXCHANGE,
+            type = ExchangeTypes.TOPIC,
+            declare = "false"
         )
+    )
 )
 public class BroadcastConsumer {
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    @RabbitHandler
-    public void onMessage(BroadcastMessage message) {
-        logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
-    }
+
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
+  @RabbitHandler
+  public void onMessage(BroadcastMessage message) {
+    logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+  }
 }

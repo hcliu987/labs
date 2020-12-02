@@ -7,16 +7,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ClusteringProducer {
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
 
-    public void syncSend(Integer id) {
-        //创建CLusteringMessage 消息
-        ClusteringMessage message = new ClusteringMessage();
-        message.setId(id);
-        //同步发送消息
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
 
+  public void syncSend(Integer id) {
+    //创建CLusteringMessage 消息
+    ClusteringMessage message = new ClusteringMessage();
+    message.setId(id);
+    //同步发送消息
 
-        rabbitTemplate.convertAndSend(ClusteringMessage.EXCHANGE,null,message);
-    }
+    rabbitTemplate.convertAndSend(ClusteringMessage.EXCHANGE, null, message);
+  }
 }

@@ -2,32 +2,30 @@ package com.hc.springboot.lab04.rabbitmqdemo.message;
 
 import java.io.Serializable;
 
-public class Demo11Message  implements Serializable {
-    private static final long serialVersionUID = 484705677223838569L;
-    public static final String QUEUE = "QUEUE_DEMO_11";
+public class Demo11Message implements Serializable {
 
-    public static final String EXCHANGE = "EXCHANGE_DEMO_11";
+  public static final String QUEUE = "QUEUE_DEMO_11";
+  public static final String EXCHANGE = "EXCHANGE_DEMO_11";
+  public static final String ROUTING_KEY = "ROUTING_KEY_11";
+  private static final long serialVersionUID = 484705677223838569L;
+  /**
+   * 编号
+   */
+  private Integer id;
 
-    public static final String ROUTING_KEY = "ROUTING_KEY_11";
+  public Integer getId() {
+    return id;
+  }
 
-    /**
-     * 编号
-     */
-    private Integer id;
+  public Demo11Message setId(Integer id) {
+    this.id = id;
+    return this;
+  }
 
-    public Demo11Message setId(Integer id) {
-        this.id = id;
-        return this;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return "Demo11Message{" +
-                "id=" + id +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "Demo11Message{" +
+        "id=" + id +
+        '}';
+  }
 }

@@ -18,26 +18,31 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ScriptTest {
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
 
-    @Test
-    public void test01() throws IOException {
-        String scriptContents = IOUtils.toString(getClass().getResourceAsStream("/lua/compareAndSet.lua"));
-        //创建redisscript对象
-        RedisScript<Long> script = new DefaultRedisScript<>(scriptContents, Long.class);
-        //执行lua脚本
-        Long result = stringRedisTemplate.execute(script, Collections.singletonList("yunai:1"), "shuai02", "shuai");
-        System.out.println(result);
-    }
+  @Autowired
+  private StringRedisTemplate stringRedisTemplate;
 
-    @Test
-    public  void test02() throws IOException {
-        String  scriptContents = IOUtils.toString(getClass().getResourceAsStream("/lua/test.lua"), "UTF-8");
-        // 创建 RedisScript 对象
-        RedisScript<List> script = new DefaultRedisScript<>(scriptContents, List.class);
+  @Test
+  public void test01() throws IOException {
+    String scriptContents = IOUtils
+        .toString(getClass().getResourceAsStream("/lua/compareAndSet.lua"));
+    //创建redisscript对象
+    RedisScript<Long> script = new DefaultRedisScript<>(scriptContents, Long.class);
+    //执行lua脚本
+    Long result = stringRedisTemplate
+        .execute(script, Collections.singletonList("yunai:1"), "shuai02", "shuai");
+    System.out.println(result);
+  }
 
-        List<Object> result = stringRedisTemplate.execute(script, Arrays.asList("key1", "key2"), "first", "second");
-        System.out.println(result);
-    }
+  @Test
+  public void test02() throws IOException {
+    String scriptContents = IOUtils
+        .toString(getClass().getResourceAsStream("/lua/test.lua"), "UTF-8");
+    // 创建 RedisScript 对象
+    RedisScript<List> script = new DefaultRedisScript<>(scriptContents, List.class);
+
+    List<Object> result = stringRedisTemplate
+        .execute(script, Arrays.asList("key1", "key2"), "first", "second");
+    System.out.println(result);
+  }
 }

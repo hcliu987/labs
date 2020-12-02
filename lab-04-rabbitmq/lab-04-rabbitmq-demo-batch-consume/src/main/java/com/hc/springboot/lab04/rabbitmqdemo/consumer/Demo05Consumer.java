@@ -12,10 +12,11 @@ import java.util.List;
 @Component
 @RabbitListener(queues = Demo05Message.QUEUE)
 public class Demo05Consumer {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RabbitHandler
-    public void onMessage(List<Demo05Message> messages) {
-        logger.info("[onMessage][线程编号:{} 消息数量:{}]",Thread.currentThread().getId(),messages.size());
-    }
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
+  @RabbitHandler
+  public void onMessage(List<Demo05Message> messages) {
+    logger.info("[onMessage][线程编号:{} 消息数量:{}]", Thread.currentThread().getId(), messages.size());
+  }
 }

@@ -10,25 +10,27 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Demo08Producer {
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
 
 
-    public void syncSend(Integer id, Integer delay) {
+  public void syncSend(Integer id, Integer delay) {
 
-        Demo08Message message=new Demo08Message();
-        message.setId(id);
-        //发送消息
-        rabbitTemplate.convertAndSend(Demo08Message.EXCHANGE, Demo08Message.ROUTING_KEY, message, new MessagePostProcessor() {
-            @Override
-            public Message postProcessMessage(Message message) throws AmqpException {
-                //设置消息的ttl过期时间
-                if(delay!=null&& delay>0){
-                    message.getMessageProperties().setExpiration(String.valueOf(delay));
-                }
-                return message;
+    Demo08Message message = new Demo08Message();
+    message.setId(id);
+    //发送消息
+    rabbitTemplate.convertAndSend(Demo08Message.EXCHANGE, Demo08Message.ROUTING_KEY, message,
+        new MessagePostProcessor() {
+          @Override
+          public Message postProcessMessage(Message message) throws AmqpException {
+            //设置消息的ttl过期时间
+            if (delay != null && delay > 0) {
+              message.getMessageProperties().setExpiration(String.valueOf(delay));
             }
+            return message;
+          }
         });
-    }
+  }
 
 }

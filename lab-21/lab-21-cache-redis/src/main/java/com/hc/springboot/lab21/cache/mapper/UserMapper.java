@@ -12,18 +12,18 @@ import org.springframework.stereotype.Repository;
 @CacheConfig(cacheNames = "users")
 public interface UserMapper extends BaseMapper<UserDO> {
 
-    @Cacheable(key = "#id")
-    UserDO selectById(Integer id);
+  @Cacheable(key = "#id")
+  UserDO selectById(Integer id);
 
-    @CachePut(key = "#user.id")
-    default UserDO insert0(UserDO user) {
-        // 插入记录
-        this.insert(user);
-        // 返回用户
-        return user;
-    }
+  @CachePut(key = "#user.id")
+  default UserDO insert0(UserDO user) {
+    // 插入记录
+    this.insert(user);
+    // 返回用户
+    return user;
+  }
 
-    @CacheEvict(key = "#id")
-    int deleteById(Integer id);
+  @CacheEvict(key = "#id")
+  int deleteById(Integer id);
 
 }

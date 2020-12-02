@@ -16,58 +16,63 @@ import java.util.UUID;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class UserMapperTest {
-    private  static  final  String CACHE_NAME_USER="USERS";
-    @Autowired
-    private UserMapper userMapper;
-    @Autowired
-    private CacheManager cacheManager;
 
-    @Test
-    public  void testSelectById(){
-        // 这里，胖友事先插入一条 id = 1 的记录。
-        Integer id = 1;
+  private static final String CACHE_NAME_USER = "USERS";
+  @Autowired
+  private UserMapper userMapper;
+  @Autowired
+  private CacheManager cacheManager;
 
-        // 查询 id = 1 的记录
-        UserDO user = userMapper.selectById(id);
-        System.out.println("user：" + user);
-        // 判断缓存中，是不是存在
-        Assert.assertNotNull("缓存为空", cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
+  @Test
+  public void testSelectById() {
+    // 这里，胖友事先插入一条 id = 1 的记录。
+    Integer id = 1;
 
-        // 查询 id = 1 的记录
-        user = userMapper.selectById(id);
-        System.out.println("user：" + user);
-    }
+    // 查询 id = 1 的记录
+    UserDO user = userMapper.selectById(id);
+    System.out.println("user：" + user);
+    // 判断缓存中，是不是存在
+    Assert.assertNotNull("缓存为空",
+        cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
 
-    @Test
-    public void testInsert() {
-        // 插入记录
-        UserDO user = new UserDO();
-        user.setUsername(UUID.randomUUID().toString()); // 随机账号，因为唯一索引
-        user.setPassword("nicai");
-        user.setCreateTime(new Date());
-        user.setDeleted(0);
-        userMapper.insert0(user);
+    // 查询 id = 1 的记录
+    user = userMapper.selectById(id);
+    System.out.println("user：" + user);
+  }
 
-        // 判断缓存中，是不是存在
-        Assert.assertNotNull("缓存为空", cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
-    }
+  @Test
+  public void testInsert() {
+    // 插入记录
+    UserDO user = new UserDO();
+    user.setUsername(UUID.randomUUID().toString()); // 随机账号，因为唯一索引
+    user.setPassword("nicai");
+    user.setCreateTime(new Date());
+    user.setDeleted(0);
+    userMapper.insert0(user);
 
-    @Test
-    public void testDeleteById() {
-        // 插入记录，为了让缓存里有记录
-        UserDO user = new UserDO();
-        user.setUsername(UUID.randomUUID().toString()); // 随机账号，因为唯一索引
-        user.setPassword("nicai");
-        user.setCreateTime(new Date());
-        user.setDeleted(0);
-        userMapper.insert0(user);
-        // 判断缓存中，是不是存在
-        Assert.assertNotNull("缓存为空", cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
+    // 判断缓存中，是不是存在
+    Assert.assertNotNull("缓存为空",
+        cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
+  }
 
-        // 删除记录，为了让缓存被删除
-        userMapper.deleteById(user.getId());
-        // 判断缓存中，是不是存在
-        Assert.assertNull("缓存不为空", cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
-    }
+  @Test
+  public void testDeleteById() {
+    // 插入记录，为了让缓存里有记录
+    UserDO user = new UserDO();
+    user.setUsername(UUID.randomUUID().toString()); // 随机账号，因为唯一索引
+    user.setPassword("nicai");
+    user.setCreateTime(new Date());
+    user.setDeleted(0);
+    userMapper.insert0(user);
+    // 判断缓存中，是不是存在
+    Assert.assertNotNull("缓存为空",
+        cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
+
+    // 删除记录，为了让缓存被删除
+    userMapper.deleteById(user.getId());
+    // 判断缓存中，是不是存在
+    Assert.assertNull("缓存不为空",
+        cacheManager.getCache(CACHE_NAME_USER).get(user.getId(), UserDO.class));
+  }
 
 }

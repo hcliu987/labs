@@ -5,30 +5,29 @@ import java.io.Serializable;
 /**
  * 广播消费的消息示例
  */
-public class ClusteringMessage  implements Serializable {
-    private static final long serialVersionUID = -4500872460184041398L;
-    public static final String QUEUE = "QUEUE_CLUSTERING";
+public class ClusteringMessage implements Serializable {
 
-    public static final String EXCHANGE = "EXCHANGE_CLUSTERING";
+  public static final String QUEUE = "QUEUE_CLUSTERING";
+  public static final String EXCHANGE = "EXCHANGE_CLUSTERING";
+  private static final long serialVersionUID = -4500872460184041398L;
+  /**
+   * 编号
+   */
+  private Integer id;
 
-    /**
-     * 编号
-     */
-    private Integer id;
+  public Integer getId() {
+    return id;
+  }
 
-    public ClusteringMessage setId(Integer id) {
-        this.id = id;
-        return this;
-    }
+  public ClusteringMessage setId(Integer id) {
+    this.id = id;
+    return this;
+  }
 
-    public Integer getId() {
-        return id;
-    }
-
-    @Override
-    public String toString() {
-        return "ClusteringtMessage{" +
-                "id=" + id +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "ClusteringtMessage{" +
+        "id=" + id +
+        '}';
+  }
 }

@@ -11,14 +11,15 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class ProductRepositoryTest {
-    @Autowired
-    private  ProductRepository productRepository;
 
-    @Test
-    public  void testInsert(){
-        ProductDO product=new ProductDO();
-        product.setName("鱼头");
-        productRepository.insert(product);
-        System.out.println(product.getId());
-    }
+  @Autowired
+  private ProductRepository productRepository;
+
+  @Test
+  public void testInsert() {
+    ProductDO product = new ProductDO();
+    product.setName("鱼头");
+    productRepository.insert(product);
+    System.out.println(product.getId());
+  }
 }

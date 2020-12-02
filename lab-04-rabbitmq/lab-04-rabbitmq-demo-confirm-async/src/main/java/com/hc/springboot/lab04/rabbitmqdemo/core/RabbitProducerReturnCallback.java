@@ -6,15 +6,18 @@ import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 
 public class RabbitProducerReturnCallback implements RabbitTemplate.ReturnCallback {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public RabbitProducerReturnCallback(RabbitTemplate rabbitTemplate) {
-        rabbitTemplate.setReturnCallback(this);
-    }
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Override
-    public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
-        logger.error("[returnedMessage][message: [{}] replyCode: [{}] replyText: [{}] exchange: [{}] routingKey: [{}]]",
-                message, replyCode, replyText, exchange, routingKey);
-    }
+  public RabbitProducerReturnCallback(RabbitTemplate rabbitTemplate) {
+    rabbitTemplate.setReturnCallback(this);
+  }
+
+  @Override
+  public void returnedMessage(Message message, int replyCode, String replyText, String exchange,
+      String routingKey) {
+    logger.error(
+        "[returnedMessage][message: [{}] replyCode: [{}] replyText: [{}] exchange: [{}] routingKey: [{}]]",
+        message, replyCode, replyText, exchange, routingKey);
+  }
 }

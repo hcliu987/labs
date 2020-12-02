@@ -14,25 +14,26 @@ import java.util.concurrent.CountDownLatch;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class Demo02ProducerTest {
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private Demo02Producer producer;
 
-    @Test
-    public void testSyncSendSuccess() throws InterruptedException {
-        int id= (int) (System.currentTimeMillis()/1000);
-        producer.syncSend(id,"da.yu.nai");
-        logger.info("[testSyncSend][发送编号:[{}] 发送成功]",id);
-        //阻塞等待,保证消费
-        new CountDownLatch(1).await();
-    }
+  private Logger logger = LoggerFactory.getLogger(getClass());
+  @Autowired
+  private Demo02Producer producer;
+
+  @Test
+  public void testSyncSendSuccess() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSend(id, "da.yu.nai");
+    logger.info("[testSyncSend][发送编号:[{}] 发送成功]", id);
+    //阻塞等待,保证消费
+    new CountDownLatch(1).await();
+  }
 
 
-    @Test
-    public  void testSyncSendFalure() throws InterruptedException {
-        int id= (int) (System.currentTimeMillis()/1000);
-        producer.syncSend(id,"da.yu.nai");
-        logger.info("[testSyncSend][发送编号:[{发送成功}]]",id);
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void testSyncSendFalure() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSend(id, "da.yu.nai");
+    logger.info("[testSyncSend][发送编号:[{发送成功}]]", id);
+    new CountDownLatch(1).await();
+  }
 }

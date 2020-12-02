@@ -15,27 +15,28 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PipelineTest {
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
 
-    @Test
-    public void test() {
-        List<Object> objects = stringRedisTemplate.executePipelined(new RedisCallback<Object>() {
-            @Override
-            public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
-                //set 写入
-                for (int i = 0; i < 3; i++) {
-                    redisConnection.set(String.format("user:%d", i).getBytes(), "shuai".getBytes());
-                }
+  @Autowired
+  private StringRedisTemplate stringRedisTemplate;
 
-                //get
-                for (int i = 0; i < 3; i++) {
-                    redisConnection.get(String.format("user:%d", i).getBytes());
-                }
-                return null;
+  @Test
+  public void test() {
+    List<Object> objects = stringRedisTemplate.executePipelined(new RedisCallback<Object>() {
+      @Override
+      public Object doInRedis(RedisConnection redisConnection) throws DataAccessException {
+        //set 写入
+        for (int i = 0; i < 3; i++) {
+          redisConnection.set(String.format("user:%d", i).getBytes(), "shuai".getBytes());
+        }
 
-            }
-        });
-        System.out.println(objects);
-    }
+        //get
+        for (int i = 0; i < 3; i++) {
+          redisConnection.get(String.format("user:%d", i).getBytes());
+        }
+        return null;
+
+      }
+    });
+    System.out.println(objects);
+  }
 }

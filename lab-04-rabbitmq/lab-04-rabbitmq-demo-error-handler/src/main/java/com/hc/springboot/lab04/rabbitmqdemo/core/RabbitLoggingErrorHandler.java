@@ -7,10 +7,11 @@ import org.springframework.util.ErrorHandler;
 
 @Component
 public class RabbitLoggingErrorHandler implements ErrorHandler {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Override
-    public void handleError(Throwable t) {
-        logger.error("[handleError][发生异常]", t);
-    }
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
+  @Override
+  public void handleError(Throwable t) {
+    logger.error("[handleError][发生异常]", t);
+  }
 }

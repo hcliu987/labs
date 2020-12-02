@@ -16,53 +16,55 @@ import java.util.List;
 
 @Repository
 public class UserDao {
-    @Autowired
-    private MongoTemplate mongoTemplate;
 
-    public void insert(UserDO entity) {
-        mongoTemplate.insert(entity);
-    }
+  @Autowired
+  private MongoTemplate mongoTemplate;
 
-    public void updateById(UserDO entity) {
-        // 生成 Update 条件
-        final Update update = new Update();
-        ReflectionUtils.doWithFields(entity.getClass(), new ReflectionUtils.FieldCallback() {
-            @Override
-            public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
-                if ("id".equals(field.getName()) || field.getAnnotation(Transient.class) != null ||
-                        Modifier.isStatic(field.getModifiers())) {
-                    return;
-                }
+  public void insert(UserDO entity) {
+    mongoTemplate.insert(entity);
+  }
 
-                if (!field.isAccessible()) {
-                    field.setAccessible(true);
-                }
-                if (field.get(entity) == null) {
-                    return;
-                }
-                update.set(field.getName(), field.get(entity));
-
-            }
-        });
-        if (update.getUpdateObject().isEmpty()) {
-            return;
+  public void updateById(UserDO entity) {
+    // 生成 Update 条件
+    final Update update = new Update();
+    ReflectionUtils.doWithFields(entity.getClass(), new ReflectionUtils.FieldCallback() {
+      @Override
+      public void doWith(Field field) throws IllegalArgumentException, IllegalAccessException {
+        if ("id".equals(field.getName()) || field.getAnnotation(Transient.class) != null ||
+            Modifier.isStatic(field.getModifiers())) {
+          return;
         }
-        mongoTemplate.updateFirst(new Query(Criteria.where("_id").is(entity.getId())), update, UserDO.class);
-    }
 
-    public void deleteById(Integer id) {
-        mongoTemplate.remove(new Query(Criteria.where("_id").is(id)), UserDO.class);
-    }
+        if (!field.isAccessible()) {
+          field.setAccessible(true);
+        }
+        if (field.get(entity) == null) {
+          return;
+        }
+        update.set(field.getName(), field.get(entity));
 
-    public UserDO findById(Integer id) {
-        return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id)), UserDO.class);
+      }
+    });
+    if (update.getUpdateObject().isEmpty()) {
+      return;
     }
+    mongoTemplate
+        .updateFirst(new Query(Criteria.where("_id").is(entity.getId())), update, UserDO.class);
+  }
 
-    public UserDO findByUsername(String username) {
-        return mongoTemplate.findOne(new Query(Criteria.where("username").is(username)), UserDO.class);
-    }
+  public void deleteById(Integer id) {
+    mongoTemplate.remove(new Query(Criteria.where("_id").is(id)), UserDO.class);
+  }
 
-    public List<UserDO> findAllById(List<Integer> ids) {
-         return mongoTemplate.find(new Query(Criteria.where("_id").in(ids)), UserDO.class);
-    }
+  public UserDO findById(Integer id) {
+    return mongoTemplate.findOne(new Query(Criteria.where("_id").is(id)), UserDO.class);
+  }
+
+  public UserDO findByUsername(String username) {
+    return mongoTemplate.findOne(new Query(Criteria.where("username").is(username)), UserDO.class);
+  }
+
+  public List<UserDO> findAllById(List<Integer> ids) {
+    return mongoTemplate.find(new Query(Criteria.where("_id").in(ids)), UserDO.class);
+  }
 }

@@ -13,18 +13,19 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 
 @Configuration
 public class MongoDBConfig {
-    @Bean
-    public MappingMongoConverter mappingMongoConverter(
-                                                        MongoDbFactory factory,
-                                                        MongoMappingContext context,
-                                                        BeanFactory beanFactory ) {
-        //创建 dbrefresolver对
 
-        DbRefResolver dbRefResolver = new DefaultDbRefResolver(factory);
-        MappingMongoConverter mongoConverter = new MappingMongoConverter(dbRefResolver, context);
-        mongoConverter.setCustomConversions(beanFactory.getBean(CustomConversions.class));
-        mongoConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
-        return mongoConverter;
-    }
+  @Bean
+  public MappingMongoConverter mappingMongoConverter(
+      MongoDbFactory factory,
+      MongoMappingContext context,
+      BeanFactory beanFactory) {
+    //创建 dbrefresolver对
+
+    DbRefResolver dbRefResolver = new DefaultDbRefResolver(factory);
+    MappingMongoConverter mongoConverter = new MappingMongoConverter(dbRefResolver, context);
+    mongoConverter.setCustomConversions(beanFactory.getBean(CustomConversions.class));
+    mongoConverter.setTypeMapper(new DefaultMongoTypeMapper(null));
+    return mongoConverter;
+  }
 
 }

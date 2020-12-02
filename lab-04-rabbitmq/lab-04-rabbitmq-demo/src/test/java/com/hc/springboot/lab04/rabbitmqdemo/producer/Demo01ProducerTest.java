@@ -18,45 +18,45 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = Application.class)
 public class Demo01ProducerTest {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private Demo01Producer producer;
+  private Logger logger = LoggerFactory.getLogger(getClass());
+  @Autowired
+  private Demo01Producer producer;
 
-    @Test
-    public void syncSend() throws InterruptedException {
-        int id = (int) (System.currentTimeMillis() / 1000);
-        producer.syncSend(id);
-        logger.info("[testSyncSend][发送编号:[{}]发送成功]", id);
-        //阻塞等待,保证消费
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void syncSend() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSend(id);
+    logger.info("[testSyncSend][发送编号:[{}]发送成功]", id);
+    //阻塞等待,保证消费
+    new CountDownLatch(1).await();
+  }
 
 
-    @Test
-    public void testSyncSendDefault() throws InterruptedException {
-        int id = (int) (System.currentTimeMillis() / 1000);
-        producer.syncSendDefault(id);
-        logger.info("[testSyncSendDefault][发送编号:[{}]发送成功]", id);
-        //阻塞等待,保证消费
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void testSyncSendDefault() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSendDefault(id);
+    logger.info("[testSyncSendDefault][发送编号:[{}]发送成功]", id);
+    //阻塞等待,保证消费
+    new CountDownLatch(1).await();
+  }
 
-    @Test
-    public  void testAsyncSend() throws InterruptedException {
-        int id= (int) (System.currentTimeMillis()/1000);
-        producer.asyncSned(id).addCallback(new ListenableFutureCallback<Void>() {
-            @Override
-            public void onFailure(Throwable throwable) {
-                logger.info("[testASyncSend][发送编号:[{}]发送异常]",id,throwable);
-            }
+  @Test
+  public void testAsyncSend() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.asyncSned(id).addCallback(new ListenableFutureCallback<Void>() {
+      @Override
+      public void onFailure(Throwable throwable) {
+        logger.info("[testASyncSend][发送编号:[{}]发送异常]", id, throwable);
+      }
 
-            @Override
-            public void onSuccess(Void unused) {
-                logger.info("[testASyncSend][发送编号:[{}]发送成功]",id);
-            }
-        });
-        logger.info("[testASyncSned][发送编号:[{}]调用完成]",id);
-        //阻塞等待,保证消费
-        new CountDownLatch(1).await();
-    }
+      @Override
+      public void onSuccess(Void unused) {
+        logger.info("[testASyncSend][发送编号:[{}]发送成功]", id);
+      }
+    });
+    logger.info("[testASyncSned][发送编号:[{}]调用完成]", id);
+    //阻塞等待,保证消费
+    new CountDownLatch(1).await();
+  }
 }

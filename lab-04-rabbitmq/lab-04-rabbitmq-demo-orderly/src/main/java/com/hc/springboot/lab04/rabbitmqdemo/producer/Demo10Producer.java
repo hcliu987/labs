@@ -7,19 +7,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Demo10Producer {
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
 
-    public void syncSend(Integer id) {
-        // 创建 Demo10Message 消息
-        Demo10Message message = new Demo10Message();
-        message.setId(id);
-        // 同步发送消息
-        rabbitTemplate.convertAndSend(Demo10Message.EXCHANGE, this.getRoutingKey(id), message);
-    }
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
 
-    private String getRoutingKey(Integer id) {
-        return String.valueOf(id % Demo10Message.QUEUE_COUNT);
-    }
+  public void syncSend(Integer id) {
+    // 创建 Demo10Message 消息
+    Demo10Message message = new Demo10Message();
+    message.setId(id);
+    // 同步发送消息
+    rabbitTemplate.convertAndSend(Demo10Message.EXCHANGE, this.getRoutingKey(id), message);
+  }
+
+  private String getRoutingKey(Integer id) {
+    return String.valueOf(id % Demo10Message.QUEUE_COUNT);
+  }
 
 }

@@ -11,10 +11,11 @@ import org.springframework.stereotype.Component;
 
 @RabbitListener(queues = Demo09Message.QUEUE, concurrency = "2")
 public class Demo09Consumer {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RabbitHandler
-    public void onMessage(Demo09Message message) {
-        logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
-    }
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
+  @RabbitHandler
+  public void onMessage(Demo09Message message) {
+    logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+  }
 }

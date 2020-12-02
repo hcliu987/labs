@@ -10,10 +10,10 @@ import org.springframework.stereotype.Component;
 @RabbitListener(queues = Demo07Message.DEAD_QUEUE)
 public class Demo07DeadConsumer {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RabbitListener
-    public void onMessage(Demo07Message message) {
-        logger.info("[onMessage][[死信队列]线程编号:{}消息内容{}]", Thread.currentThread().getId(), message);
-    }
+  @RabbitListener
+  public void onMessage(Demo07Message message) {
+    logger.info("[onMessage][[死信队列]线程编号:{}消息内容{}]", Thread.currentThread().getId(), message);
+  }
 }

@@ -16,18 +16,19 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class Demo14ProducerTest {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private Demo14Producer producer;
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Test
-    public void syncSend() throws InterruptedException {
-        int id = (int) (System.currentTimeMillis() / 1000);
-        String result = producer.syncSend(id);
-        logger.info("[testSyncSend][发送编号：[{}] 发送成功 消费结果：[{}]]", id, result);
+  @Autowired
+  private Demo14Producer producer;
 
-        // 阻塞等待，保证消费
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void syncSend() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    String result = producer.syncSend(id);
+    logger.info("[testSyncSend][发送编号：[{}] 发送成功 消费结果：[{}]]", id, result);
+
+    // 阻塞等待，保证消费
+    new CountDownLatch(1).await();
+  }
 }

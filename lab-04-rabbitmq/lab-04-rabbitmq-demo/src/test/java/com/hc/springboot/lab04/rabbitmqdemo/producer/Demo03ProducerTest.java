@@ -15,16 +15,16 @@ import java.util.concurrent.CountDownLatch;
 @SpringBootTest(classes = Application.class)
 public class Demo03ProducerTest {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private Demo03Producer producer;
+  private Logger logger = LoggerFactory.getLogger(getClass());
+  @Autowired
+  private Demo03Producer producer;
 
-    @Test
-    public  void  testSyncSend() throws InterruptedException {
-        int id= (int) (System.currentTimeMillis()/1000);
-        producer.syncSend(id);
-        logger.info("[testSyncSend][发送编号:[{}]发送成功]",id);
-        //阻塞等待,保证消费
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void testSyncSend() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSend(id);
+    logger.info("[testSyncSend][发送编号:[{}]发送成功]", id);
+    //阻塞等待,保证消费
+    new CountDownLatch(1).await();
+  }
 }

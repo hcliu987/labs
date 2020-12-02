@@ -12,11 +12,11 @@ import org.springframework.stereotype.Component;
 public class Demo03ConsumerA {
 
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RabbitHandler
-    public void onMessage(Demo03Message message) {
-        logger.info("[onMessage][线程编号:{}[消息内容:{}]]",Thread.currentThread().getId(),message);
-    }
+  @RabbitHandler
+  public void onMessage(Demo03Message message) {
+    logger.info("[onMessage][线程编号:{}[消息内容:{}]]", Thread.currentThread().getId(), message);
+  }
 
 }

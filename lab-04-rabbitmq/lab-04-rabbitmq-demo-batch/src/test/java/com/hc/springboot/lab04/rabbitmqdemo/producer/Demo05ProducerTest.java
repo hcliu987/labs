@@ -18,20 +18,20 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = Application.class)
 public class Demo05ProducerTest {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private Demo05Producer producer;
+  private Logger logger = LoggerFactory.getLogger(getClass());
+  @Autowired
+  private Demo05Producer producer;
 
-    @Test
-    public void syncSend() throws InterruptedException {
-        for (int i = 0; i < 3; i++) {
-            //同步发送消息
-            int id = (int) (System.currentTimeMillis() / 1000);
-            producer.syncSend(id);
-            //故意每条消息之间，间隔10秒
-            logger.info("[testSyncSend][发送编号:[{}] 发送成功]", id);
-            Thread.sleep(10_000);
-        }
-        new CountDownLatch(1).await();
+  @Test
+  public void syncSend() throws InterruptedException {
+    for (int i = 0; i < 3; i++) {
+      //同步发送消息
+      int id = (int) (System.currentTimeMillis() / 1000);
+      producer.syncSend(id);
+      //故意每条消息之间，间隔10秒
+      logger.info("[testSyncSend][发送编号:[{}] 发送成功]", id);
+      Thread.sleep(10_000);
     }
+    new CountDownLatch(1).await();
+  }
 }

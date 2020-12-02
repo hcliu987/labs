@@ -15,15 +15,15 @@ import org.springframework.stereotype.Component;
 @RabbitListener(queues = Demo10Message.QUEUE_3)
 public class Demo10Consumer {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RabbitHandler(isDefault = true)
-    public void onMessage(Message<Demo10Message> message) {
-        logger.info("[onMessage][[线程编号:{} Queue:{} 消息内容:{}]",Thread.currentThread().getId(),getQueue(message));
-    }
+  private static String getQueue(Message<Demo10Message> message) {
+    return message.getHeaders().get("amqp_consumerQueue", String.class);
+  }
 
-
-    private static String getQueue(Message<Demo10Message> message) {
-        return message.getHeaders().get("amqp_consumerQueue", String.class);
-    }
+  @RabbitHandler(isDefault = true)
+  public void onMessage(Message<Demo10Message> message) {
+    logger.info("[onMessage][[线程编号:{} Queue:{} 消息内容:{}]", Thread.currentThread().getId(),
+        getQueue(message));
+  }
 }

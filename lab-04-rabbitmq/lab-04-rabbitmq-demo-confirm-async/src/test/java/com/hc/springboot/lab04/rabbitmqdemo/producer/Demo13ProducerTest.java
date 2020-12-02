@@ -17,26 +17,27 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = Application.class)
 public class Demo13ProducerTest {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+  private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private Demo13Producer producer;
-    @Test
-    public void syncSend() throws InterruptedException {
+  @Autowired
+  private Demo13Producer producer;
 
-        int id= (int) (System.currentTimeMillis()/1000);
-        producer.syncSend(id);
-        logger.info("[syncSend][发送编号:{} 发送成功]",id);
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void syncSend() throws InterruptedException {
 
-    @Test
-    public void syncSendReturn() throws InterruptedException {
-        int id= (int) (System.currentTimeMillis()/1000);
-        producer.syncSendReturn(id);
-        logger.info("[syncSendReturn][发送编号：[{}] 发送成功]", id);
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSend(id);
+    logger.info("[syncSend][发送编号:{} 发送成功]", id);
+    new CountDownLatch(1).await();
+  }
 
-        // 阻塞等待，保证消费
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void syncSendReturn() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSendReturn(id);
+    logger.info("[syncSendReturn][发送编号：[{}] 发送成功]", id);
+
+    // 阻塞等待，保证消费
+    new CountDownLatch(1).await();
+  }
 }

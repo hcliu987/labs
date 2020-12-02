@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <parent>
-        <artifactId>labs</artifactId>
-        <groupId>org.hc</groupId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <artifactId>lab-04-rabbitmq</artifactId>
+  <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>lab-04-rabbitmq</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>lab-04-rabbitmq-demo</module>
-        <module>lab-04-rabbitmq-demo-batch</module>
-        <module>lab-04-rabbitmq-demo-batch-consume</module>
-        <module>lab-04-rabbitmq-demo-batch-consume-02</module>
-        <module>lab-04-rabbitmq-consume-retry</module>
-        <module>lab-04-rabbitmq-demo-delay</module>
-        <module>lab-04-rabbitmq-demo-message-model</module>
-        <module>lab-04-rabbitmq-demo-concurrency</module>
-        <module>lab-04-rabbitmq-demo-orderly</module>
-        <module>lab-04-rabbitmq-demo-transaction</module>
-        <module>lab-04-rabbitmq-demo-ack</module>
-        <module>lab-04-rabbitmq-demo-confirm</module>
-        <module>lab-04-rabbitmq-demo-confirm-async</module>
-        <module>lab-04-rabbitmq-demo-rpc</module>
-        <module>lab-04-rabbitmq-demo-json</module>
-        <module>lab-04-rabbitmq-demo-error-handler</module>
-    </modules>
+  <modules>
+    <module>lab-04-rabbitmq-demo</module>
+    <module>lab-04-rabbitmq-demo-batch</module>
+    <module>lab-04-rabbitmq-demo-batch-consume</module>
+    <module>lab-04-rabbitmq-demo-batch-consume-02</module>
+    <module>lab-04-rabbitmq-consume-retry</module>
+    <module>lab-04-rabbitmq-demo-delay</module>
+    <module>lab-04-rabbitmq-demo-message-model</module>
+    <module>lab-04-rabbitmq-demo-concurrency</module>
+    <module>lab-04-rabbitmq-demo-orderly</module>
+    <module>lab-04-rabbitmq-demo-transaction</module>
+    <module>lab-04-rabbitmq-demo-ack</module>
+    <module>lab-04-rabbitmq-demo-confirm</module>
+    <module>lab-04-rabbitmq-demo-confirm-async</module>
+    <module>lab-04-rabbitmq-demo-rpc</module>
+    <module>lab-04-rabbitmq-demo-json</module>
+    <module>lab-04-rabbitmq-demo-error-handler</module>
+  </modules>
+  <packaging>pom</packaging>
+  <parent>
+    <artifactId>labs</artifactId>
+    <groupId>org.hc</groupId>
+    <version>1.0-SNAPSHOT</version>
+  </parent>
 
 
 </project>

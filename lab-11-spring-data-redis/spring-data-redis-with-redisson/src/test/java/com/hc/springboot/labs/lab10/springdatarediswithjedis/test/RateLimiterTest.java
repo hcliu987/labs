@@ -17,17 +17,19 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class RateLimiterTest {
-    @Autowired
-    private RedissonClient redissonClient;
 
-    @Test
-    public void test() throws InterruptedException {
-        RRateLimiter rateLimiter = redissonClient.getRateLimiter("myRateLimiter");
-        rateLimiter.trySetRate(RateType.OVERALL, 2, 1, RateIntervalUnit.SECONDS);
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for (int i = 0; i < 5; i++) {
-            System.out.println(String.format("%s:获得锁结果(%s)", simpleDateFormat.format(new Date()),rateLimiter.tryAcquire()));
-            Thread.sleep(250L);
-        }
+  @Autowired
+  private RedissonClient redissonClient;
+
+  @Test
+  public void test() throws InterruptedException {
+    RRateLimiter rateLimiter = redissonClient.getRateLimiter("myRateLimiter");
+    rateLimiter.trySetRate(RateType.OVERALL, 2, 1, RateIntervalUnit.SECONDS);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    for (int i = 0; i < 5; i++) {
+      System.out.println(String
+          .format("%s:获得锁结果(%s)", simpleDateFormat.format(new Date()), rateLimiter.tryAcquire()));
+      Thread.sleep(250L);
     }
+  }
 }

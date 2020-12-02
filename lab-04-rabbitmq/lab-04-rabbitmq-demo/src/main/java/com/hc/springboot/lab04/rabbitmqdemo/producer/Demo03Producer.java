@@ -7,15 +7,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Demo03Producer {
-    @Autowired
-    private RabbitTemplate rabbitTemplate;
+
+  @Autowired
+  private RabbitTemplate rabbitTemplate;
 
 
-    public  void syncSend(Integer id){
-        //创建Demo03Message 消息
-        Demo03Message message=new Demo03Message();
-        message.setId(id);
-        //发送同步消息
-        rabbitTemplate.convertAndSend(Demo03Message.EXCHANGE,null,message);
-    }
+  public void syncSend(Integer id) {
+    //创建Demo03Message 消息
+    Demo03Message message = new Demo03Message();
+    message.setId(id);
+    //发送同步消息
+    rabbitTemplate.convertAndSend(Demo03Message.EXCHANGE, null, message);
+  }
 }

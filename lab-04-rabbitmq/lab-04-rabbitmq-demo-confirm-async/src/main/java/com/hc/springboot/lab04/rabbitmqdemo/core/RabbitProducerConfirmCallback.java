@@ -8,19 +8,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RabbitProducerConfirmCallback implements RabbitTemplate.ConfirmCallback {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    public RabbitProducerConfirmCallback(RabbitTemplate rabbitTemplate) {
-        rabbitTemplate.setConfirmCallback(this);
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
+  public RabbitProducerConfirmCallback(RabbitTemplate rabbitTemplate) {
+    rabbitTemplate.setConfirmCallback(this);
+  }
+
+
+  @Override
+  public void confirm(CorrelationData correlationData, boolean b, String s) {
+    if (b) {
+      logger.info("[confirm][Confirm 成功 correlationData: {}]", correlationData);
+    } else {
+      logger.info("[confirm][Confirm 失败 correlationData: {} cause]", correlationData, s);
     }
-
-
-    @Override
-    public void confirm(CorrelationData correlationData, boolean b, String s) {
-        if (b){
-            logger.info("[confirm][Confirm 成功 correlationData: {}]", correlationData);
-        }else {
-            logger.info("[confirm][Confirm 失败 correlationData: {} cause]", correlationData,s);
-        }
-    }
+  }
 }

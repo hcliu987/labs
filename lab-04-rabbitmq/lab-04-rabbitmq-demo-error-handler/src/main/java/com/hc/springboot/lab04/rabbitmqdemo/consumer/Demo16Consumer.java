@@ -9,15 +9,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 @RabbitListener(queues = Demo16Message.QUEUE,
-errorHandler = "rabbitListenerErrorHandler")
+    errorHandler = "rabbitListenerErrorHandler")
 public class Demo16Consumer {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @RabbitHandler
-    public void onMessage(Demo16Message message) {
-        logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
-        // 模拟消费异常
-        throw new RuntimeException("你猜");
-    }
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
+  @RabbitHandler
+  public void onMessage(Demo16Message message) {
+    logger.info("[onMessage][线程编号:{} 消息内容：{}]", Thread.currentThread().getId(), message);
+    // 模拟消费异常
+    throw new RuntimeException("你猜");
+  }
 
 }

@@ -16,23 +16,25 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
 public class ClusteringProducerTest {
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Autowired
-    private ClusteringProducer producer;
+  private Logger logger = LoggerFactory.getLogger(getClass());
+
+  @Autowired
+  private ClusteringProducer producer;
 
 
-    @Test
-    public  void mock() throws InterruptedException {
-        new CountDownLatch(1).await();
+  @Test
+  public void mock() throws InterruptedException {
+    new CountDownLatch(1).await();
+  }
+
+  @Test
+  public void syncSend() throws InterruptedException {
+    for (int i = 0; i < 3; i++) {
+      int id = (int) (System.currentTimeMillis() / 1000);
+      producer.syncSend(id);
+      logger.info("[testSyncSend][发送编号：[{}] 发送成功]", id);
     }
-    @Test
-    public void syncSend() throws InterruptedException {
-        for (int i = 0; i < 3; i++) {
-            int id= (int) (System.currentTimeMillis()/1000);
-            producer.syncSend(id);
-            logger.info("[testSyncSend][发送编号：[{}] 发送成功]", id);
-        }
-        new CountDownLatch(1).await();
-    }
+    new CountDownLatch(1).await();
+  }
 }

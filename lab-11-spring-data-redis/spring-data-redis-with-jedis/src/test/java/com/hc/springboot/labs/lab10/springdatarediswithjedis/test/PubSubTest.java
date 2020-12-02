@@ -10,16 +10,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class PubSubTest {
-    public static final String TOPIC = "TEST";
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
 
-    @Test
-    public void test01() throws InterruptedException {
-        for (int i = 0; i < 3; i++) {
-            stringRedisTemplate.convertAndSend(TOPIC, "yunai" + i);
-            Thread.sleep(10000L);
-        }
+  public static final String TOPIC = "TEST";
+  @Autowired
+  private StringRedisTemplate stringRedisTemplate;
 
+  @Test
+  public void test01() throws InterruptedException {
+    for (int i = 0; i < 3; i++) {
+      stringRedisTemplate.convertAndSend(TOPIC, "yunai" + i);
+      Thread.sleep(10000L);
     }
+
+  }
 }

@@ -17,15 +17,15 @@ import static org.junit.Assert.*;
 @SpringBootTest(classes = Application.class)
 public class Demo07ProducerTest {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
-    @Autowired
-    private  Demo07Producer producer;
+  private Logger logger = LoggerFactory.getLogger(getClass());
+  @Autowired
+  private Demo07Producer producer;
 
-    @Test
-    public void syncSend() throws InterruptedException {
-        int id= (int) (System.currentTimeMillis()/1000);
-        producer.syncSend(id);
-        logger.info("[syncSend][发送编号:[{}]发送成功]",id);
-        new CountDownLatch(1).await();
-    }
+  @Test
+  public void syncSend() throws InterruptedException {
+    int id = (int) (System.currentTimeMillis() / 1000);
+    producer.syncSend(id);
+    logger.info("[syncSend][发送编号:[{}]发送成功]", id);
+    new CountDownLatch(1).await();
+  }
 }
