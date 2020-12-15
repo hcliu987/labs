@@ -13,6 +13,7 @@
     <!--        <module>lab-21</module>-->
     <module>labs-001-nginx</module>
     <module>labs-002-java-8</module>
+    <module>lab-12-mybatis</module>
   </modules>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
